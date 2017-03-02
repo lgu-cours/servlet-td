@@ -1,0 +1,144 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://java.sun.com/xml/ns/javaee" 
+         xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_3_0.xsd" 
+         id="WebApp_ID" version="3.0">
+  <display-name>servlet-td</display-name>
+
+  <servlet>
+    <display-name>Servlet du TD1 Hello</display-name>
+    <servlet-name>Hello</servlet-name>
+    <servlet-class>td.servlet.td1.Hello</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>Hello</servlet-name>
+    <url-pattern>/Hello</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>Hello</servlet-name>
+    <url-pattern>/Hello/*</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <servlet-name>HelloConfig</servlet-name>
+    <servlet-class>td.servlet.td2.HelloConfig</servlet-class>
+    <init-param>
+      <param-name>lang</param-name>
+      <param-value>en</param-value>
+    </init-param>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>HelloConfig</servlet-name>
+    <url-pattern>/HelloConfig</url-pattern>
+  </servlet-mapping>
+  
+  <servlet>
+    <servlet-name>HelloParamServlet</servlet-name>
+    <servlet-class>td.servlet.td3.HelloParam</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>HelloParamServlet</servlet-name>
+    <url-pattern>/HelloParam</url-pattern>
+  </servlet-mapping>
+  
+  <servlet>
+    <servlet-name>RedirectServlet</servlet-name>
+    <servlet-class>td.servlet.td4.Redirect</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>RedirectServlet</servlet-name>
+    <url-pattern>/Redirect</url-pattern>
+  </servlet-mapping>
+  
+  <servlet>
+    <servlet-name>SessionInitServlet</servlet-name>
+    <servlet-class>td.servlet.td5.SessionInit</servlet-class>
+  </servlet>
+  <servlet>
+    <servlet-name>SessionShowServlet</servlet-name>
+    <servlet-class>td.servlet.td5.SessionShow</servlet-class>
+  </servlet>
+  <servlet>
+    <servlet-name>SessionStopServlet</servlet-name>
+    <servlet-class>td.servlet.td5.SessionStop</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>SessionInitServlet</servlet-name>
+    <url-pattern>/SessionInit</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>SessionShowServlet</servlet-name>
+    <url-pattern>/SessionShow</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>SessionStopServlet</servlet-name>
+    <url-pattern>/SessionStop</url-pattern>
+  </servlet-mapping>
+  
+  <servlet>
+    <servlet-name>ForwardServlet</servlet-name>
+    <servlet-class>td.servlet.td6.Forward</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>ForwardServlet</servlet-name>
+    <url-pattern>/Forward</url-pattern>
+  </servlet-mapping>
+  
+  <servlet>
+    <servlet-name>Include</servlet-name>
+    <servlet-class>td.servlet.td7.Include</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>Include</servlet-name>
+    <url-pattern>/Include</url-pattern>
+  </servlet-mapping>
+  
+  <servlet>
+    <servlet-name>Cadre</servlet-name>
+    <servlet-class>td.servlet.td7.Cadre</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>Cadre</servlet-name>
+    <url-pattern>/Cadre</url-pattern>
+  </servlet-mapping>
+  
+  <servlet>
+    <servlet-name>Contenu</servlet-name>
+    <servlet-class>td.servlet.td7.Contenu</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>Contenu</servlet-name>
+    <url-pattern>/Contenu1</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>Contenu</servlet-name>
+    <url-pattern>/Contenu2</url-pattern>
+  </servlet-mapping>
+  
+  <servlet>
+    <servlet-name>TableauServlet</servlet-name>
+    <servlet-class>td.servlet.td8.Tableau</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>TableauServlet</servlet-name>
+    <url-pattern>/Tableau</url-pattern>
+  </servlet-mapping>
+  
+  <filter>
+    <display-name>Monitor</display-name>
+    <filter-name>Monitor</filter-name>
+    <filter-class>td.servlet.td9.Monitor</filter-class>
+  </filter>
+  <filter-mapping>
+    <filter-name>Monitor</filter-name>
+    <url-pattern>/*</url-pattern>
+  </filter-mapping>
+
+  <welcome-file-list>
+    <welcome-file>index.html</welcome-file>
+    <welcome-file>index.htm</welcome-file>
+    <welcome-file>index.jsp</welcome-file>
+    <welcome-file>default.html</welcome-file>
+    <welcome-file>default.htm</welcome-file>
+    <welcome-file>default.jsp</welcome-file>
+  </welcome-file-list>
+
+</web-app>
