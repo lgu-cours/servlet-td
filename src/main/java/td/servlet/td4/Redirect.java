@@ -54,6 +54,9 @@ public class Redirect extends HttpServlet
             	//--- Code HTTP 302 renvoyé au navigateur => le navigateur va refaire un GET sur "/webapp-context/page2.html"
                 response.sendRedirect(contextPath + "/page2.html");
             }
+            else if (sPage.startsWith("w") ) {
+                response.sendRedirect("https://www.wikipedia.org/");
+            }
             else
             {
                 response.sendError(404);

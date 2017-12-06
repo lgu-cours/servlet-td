@@ -99,6 +99,11 @@ public class HelloParam extends HttpServlet
         }
         out.println("<h1>" + hello + " " + paramNom + " ! </h1>");
         
+        out.println("<h1>Request info : </h1>");
+        out.println(" <ul>");
+        out.println(" <li> getRequestURL() : " + request.getRequestURL() );
+        out.println(" <li> getContextPath() : " + request.getContextPath() );
+        out.println(" </ul>");
         out.println(" </body>");
         out.println("</html>");
         
