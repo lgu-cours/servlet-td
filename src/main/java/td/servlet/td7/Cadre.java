@@ -37,22 +37,25 @@ public class Cadre extends HttpServlet
         process(request, response);
     }
 
-    private void header(PrintWriter out)
-    {
+    private void header(PrintWriter out) {
 	    ServletConfig config = getServletConfig();
 
         out.println("<html>");
         out.println("<head>");
         out.println("<title>Cadre</title>");
         out.println("</head>");
+        
         out.println("<body>");
         out.println("<hr/>");
-		out.println("<h2> ServletName = " + config.getServletName() + "</h2> ");
-        out.println("<h2>Ci-dessous le contenu demandé : </h2>");
+        out.println("Header </br>");
+		out.println("ServletName = " + config.getServletName() + "</br>" );
+        out.println("Ci-dessous le contenu demandé </br>");
+        out.println("<hr/>");
     }
 
-    private void footer(PrintWriter out)
-    {
+    private void footer(PrintWriter out) {
+        out.println("<hr/>");
+        out.println("Footer");
         out.println("<hr/>");
         out.println("</body>");
         out.println("</html>");

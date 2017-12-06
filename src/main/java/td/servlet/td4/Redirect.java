@@ -40,7 +40,8 @@ public class Redirect extends HttpServlet
         String sPage = request.getParameter("page");
         if (sPage == null)
         {
-            response.sendError(404); //--- Code HTTP 404 : "Page Not Found" 
+            //response.sendError(404); //--- Code HTTP 404 : "Page Not Found" 
+            response.sendError(400); //--- Code HTTP 400 : "Bad request" 
         }
         else
         {
