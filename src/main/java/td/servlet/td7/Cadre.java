@@ -20,20 +20,17 @@ public class Cadre extends HttpServlet
 {
 	private static final long serialVersionUID = 1L;
 
-	public void init() throws ServletException
-    {
+	public void init() throws ServletException {
         System.out.println("init : Servlet Cadre ");
     }
 
     //--- Requete GET
-    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException
-    {
+    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         process(request, response);
     }
 
     //--- Requete POST
-    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException
-    {
+    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         process(request, response);
     }
 
@@ -60,9 +57,30 @@ public class Cadre extends HttpServlet
         out.println("</body>");
         out.println("</html>");
     }
+    
+    private void includeResource(String uri, HttpServletRequest request, HttpServletResponse response) 
+    	throws ServletException, IOException {
+        if ( uri != null) {
+            //--- Passage d'objet par la requête
+            request.setAttribute("param", uri); // Stockage de l'objet en tant qu'attribut de requête
 
-    private void process(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException
-    {
+            //--- Inclusion du contenu 
+            RequestDispatcher rd = request.getRequestDispatcher(uri);
+            if (rd != null) {
+                System.out.println("Avant INCLUDE " + uri );
+                rd.include(request, response);
+                System.out.println("Après INCLUDE");
+            }
+            else {
+                throw new RuntimeException("Cannot get RequestDispatcher");
+            }
+        }
+        else {
+            throw new IllegalArgumentException("Invalid URI");
+        }
+    }
+    
+    private void process(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String ressourceAInclure = null;
 
         response.setContentType("text/html");
@@ -72,47 +90,54 @@ public class Cadre extends HttpServlet
         header ( out );
         
         //--- Récupération du nom ( paramètre de la requête )
-        String paramPage = request.getParameter("page");
-        if (paramPage == null)
-        {
-            out.println("<h2>Erreur : Pas de numéro de page ! </h2>");
-        }
-        else
-        {
+        String paramContenu = request.getParameter("contenu");
+        if (paramContenu != null) {
 
-            if (paramPage.equals("1"))
-            {               
+            if (paramContenu.equals("1")) {               
                 ressourceAInclure = "/Contenu1"; // URL mappée sur la Servlet "Contenu"
             }
-            else if (paramPage.equals("2"))
-            {
+            else if (paramContenu.equals("2")) {
                 ressourceAInclure = "/Contenu2"; // Autre URL également mappée sur la Servlet "Contenu"
-            }
-
-            if (ressourceAInclure != null)
-            {
-                //--- Passage d'objet par la requête
-                request.setAttribute("param", ressourceAInclure); // Stockage de l'objet en tant qu'attribut de requête
-
-                //--- Inclusion du contenu 
-                RequestDispatcher rd = request.getRequestDispatcher(ressourceAInclure);
-                if (rd != null)
-                {
-                    System.out.println("Avant INCLUDE " + ressourceAInclure );
-                    rd.include(request, response);
-                    System.out.println("Après INCLUDE");
-                }
-                else
-                {
-                    out.println("<h2>Erreur : Request Dispatcher = null ! </h2>");
-                }
-            }
-            else
-            {
-                out.println("<h2>Erreur : Numéro de page incorrect ! </h2>");
             }
         }
 
+        String part = request.getParameter("part");
+        if (part != null) {
+            if (part.equals("1")) {
+                ressourceAInclure = "/part1"; 
+            }
+            else if (part.equals("2")) {
+                ressourceAInclure = "/part2"; 
+            }
+        }
+//            if (ressourceAInclure != null) {
+//                //--- Passage d'objet par la requête
+//                request.setAttribute("param", ressourceAInclure); // Stockage de l'objet en tant qu'attribut de requête
+//
+//                //--- Inclusion du contenu 
+//                RequestDispatcher rd = request.getRequestDispatcher(ressourceAInclure);
+//                if (rd != null)
+//                {
+//                    System.out.println("Avant INCLUDE " + ressourceAInclure );
+//                    rd.include(request, response);
+//                    System.out.println("Après INCLUDE");
+//                }
+//                else
+//                {
+//                    out.println("<h2>Erreur : Request Dispatcher = null ! </h2>");
+//                }
+//            }
+//            else
+//            {
+//                out.println("<h2>Erreur : Numéro de page incorrect ! </h2>");
+//            }
+        
+        if ( ressourceAInclure != null ) {
+        	// Stockage des objets à transmettre (dans attribut de requête)
+        	request.setAttribute("param", ressourceAInclure); 
+        	includeResource(ressourceAInclure, request, response);
+        }
+        
         //--- Pied de page
         footer ( out );
     }

@@ -49,6 +49,7 @@
 		    <groupId>httpunit</groupId>
 		    <artifactId>httpunit</artifactId>
 		    <version>1.6.2</version>
+            <scope>test</scope>
 		</dependency>
          
 </dependencies>
