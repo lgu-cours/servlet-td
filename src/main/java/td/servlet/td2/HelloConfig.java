@@ -29,12 +29,12 @@ public class HelloConfig extends HttpServlet {
     public void init() throws ServletException {
         System.out.println("init : Servlet HelloConfig ");
         
-        ServletConfig config = getServletConfig();
-        if ( config != null ) {
+        ServletConfig servletConfig = getServletConfig();
+        if ( servletConfig != null ) {
         	// Récupération du paramètre défini dans le fichier "web.xml"
-            String sLang = config.getInitParameter("lang");
-            if ( sLang != null ) {
-                lang = sLang.toUpperCase() ;                
+            String langConfig = servletConfig.getInitParameter("lang");
+            if ( langConfig != null ) {
+                lang = langConfig.toUpperCase() ;                
             }
             else {
                 lang = "FR" ; // FR par défaut 

@@ -9,30 +9,33 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 /**
- * TD 4 bis
- *  
+ * TD SEND ERROR 
+ * HTTP 418 : I'm a teapot 
+ * 
  * @author Laurent GUERIN 
  * 
  */
 @WebServlet( urlPatterns={"/cafe", "/coffee"} )
-public class Cafe extends HttpServlet
-{
+public class Cafe extends HttpServlet {
+	
 	private static final long serialVersionUID = 1L;
 
 	//--- Requete GET
-    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException
-    {
+	@Override
+    protected void doGet(HttpServletRequest request, HttpServletResponse response) 
+    		throws ServletException, IOException {
         process(request, response);
     }
 
     //--- Requete POST
-    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException
-    {
+	@Override
+    protected void doPost(HttpServletRequest request, HttpServletResponse response) 
+    		throws ServletException, IOException {
         process(request, response);
     }
 
-    private void process(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException
-    {
+    private void process(HttpServletRequest request, HttpServletResponse response) 
+    		throws ServletException, IOException {
     	// Just for fun !
         response.sendError(418); //--- Code HTTP 418 : "I'm a teapot" 
     }

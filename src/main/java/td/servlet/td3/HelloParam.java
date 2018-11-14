@@ -19,18 +19,18 @@ public class HelloParam extends HttpServlet {
 	
 	private static final long serialVersionUID = 1L;
 	
-	private String _sLang = null ;
+	private String lang = null ;
     
 	@Override
     public void init() throws ServletException {
-        ServletConfig config = getServletConfig();
-        if ( config != null ) {
-            String sLang = config.getInitParameter("lang");
-            if ( sLang != null ) {
-                _sLang = sLang.toUpperCase() ;                
+        ServletConfig servletConfig = getServletConfig();
+        if ( servletConfig != null ) {
+            String langConfig = servletConfig.getInitParameter("lang");
+            if ( langConfig != null ) {
+                lang = langConfig.toUpperCase() ;                
             }
             else {
-                _sLang = "FR" ;
+                lang = "FR" ;
             }
         }
     }
@@ -60,7 +60,7 @@ public class HelloParam extends HttpServlet {
         out.println(" </head>");
         out.println(" <body>");
         
-        out.println("<h4> Lang (instance)  = " + _sLang + "</h4>");
+        out.println("<h4> Lang (instance)  = " + lang + "</h4>");
 
         //--- Récupération du nom ( paramètre de la requête )
         String paramNom = request.getParameter("nom") ;
@@ -71,7 +71,7 @@ public class HelloParam extends HttpServlet {
         //--- Récupération de la langue ( paramètre de la requête )
         String paramLang = request.getParameter("lang") ;
         if ( paramLang == null ) {
-            paramLang = _sLang ;
+            paramLang = lang ;
         }
         else {
             paramLang = paramLang.toUpperCase() ;
