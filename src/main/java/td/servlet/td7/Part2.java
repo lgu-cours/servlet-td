@@ -17,14 +17,16 @@ import javax.servlet.http.HttpServletResponse;
  */
 @WebServlet(urlPatterns="/part2")
 public class Part2 extends HttpServlet {
+	
 	private static final long serialVersionUID = 1L;
 
-	//--- Requete GET
+	@Override
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 					throws ServletException, IOException {
 		process(request, response);
 	}
-	//--- Requete POST 
+	
+	@Override
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 					throws ServletException, IOException {
 		process(request, response);

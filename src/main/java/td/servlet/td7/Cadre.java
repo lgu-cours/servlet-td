@@ -16,21 +16,23 @@ import javax.servlet.http.HttpServletResponse;
  * @author Laurent GUERIN 
  * 
  */
-public class Cadre extends HttpServlet
-{
+public class Cadre extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
+	@Override
 	public void init() throws ServletException {
         System.out.println("init : Servlet Cadre ");
     }
 
-    //--- Requete GET
-    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	@Override
+    protected void doGet(HttpServletRequest request, HttpServletResponse response) 
+    		throws ServletException, IOException {
         process(request, response);
     }
 
-    //--- Requete POST
-    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	@Override
+	protected void doPost(HttpServletRequest request, HttpServletResponse response) 
+    		throws ServletException, IOException {
         process(request, response);
     }
 

@@ -16,31 +16,27 @@ import javax.servlet.http.HttpServletResponse;
  * 
  */
 
-public class Contenu extends HttpServlet
-{
+public class Contenu extends HttpServlet {
+	
 	private static final long serialVersionUID = 1L;
 
-	//--- Requete GET
+	@Override
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
-					throws ServletException, IOException
-	{
+					throws ServletException, IOException {
 		process(request, response);
 	}
-	//--- Requete POST 
+
+	@Override
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
-					throws ServletException, IOException
-	{
+					throws ServletException, IOException {
 		process(request, response);
 	}
 	
 	private void process(HttpServletRequest request, HttpServletResponse response)
-					throws ServletException, IOException
-	{
-//		response.setContentType("text/html");
+					throws ServletException, IOException {
 	    String sParam = (String) request.getAttribute("param");
 	    
 	    ServletConfig config = getServletConfig();
-	    
 	    
 		PrintWriter out = response.getWriter();
 		out.println("<div style='background-color:yellow' >");
@@ -54,6 +50,5 @@ public class Contenu extends HttpServlet
 		out.println("<h4>Path Translated = " + request.getPathTranslated() + "</h4>");
 		out.println("<h4>Protocol = " + request.getProtocol() + "</h4>");
 		out.println("</div>");
-		
 	}
 }

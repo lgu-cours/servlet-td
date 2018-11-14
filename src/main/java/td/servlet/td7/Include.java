@@ -5,27 +5,24 @@ import java.io.*;
 import javax.servlet.*;
 import javax.servlet.http.*;
 
-public class Include extends HttpServlet
-{
+public class Include extends HttpServlet {
+	
 	private static final long serialVersionUID = 1L;
 
-	//--- Requete GET
+	@Override
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
-					throws ServletException, IOException
-	{
-		process(request, response);
-	}
-	//--- Requete POST 
-	protected void doPost(HttpServletRequest request, HttpServletResponse response)
-					throws ServletException, IOException
-	{
+			throws ServletException, IOException {
 		process(request, response);
 	}
 	
-	private void process( HttpServletRequest request, 
-							HttpServletResponse response ) 
-					throws ServletException, IOException
-	{
+	@Override
+	protected void doPost(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
+		process(request, response);
+	}
+	
+	private void process( HttpServletRequest request, HttpServletResponse response ) 
+			throws ServletException, IOException {
         response.setContentType("text/html");
         PrintWriter out = response.getWriter();
         out.println("<html>");
@@ -34,15 +31,13 @@ public class Include extends HttpServlet
         out.println("</head>");
         out.println("<body>");
 
-
 		out.println("<hr>");
 		out.println("<h2>Début de servlet Include.java</h2>");
 		out.println("<hr>");
 		
 		//--- 1er Include
 		RequestDispatcher rd1 = request.getRequestDispatcher("/include1.html");
-		if ( rd1 != null )
-		{
+		if ( rd1 != null ) {
 			rd1.include(request,response);	
 			rd1.include(request,response);	
 		}
@@ -53,8 +48,7 @@ public class Include extends HttpServlet
 
 		//--- 2ème Include
 		RequestDispatcher rd2 = request.getRequestDispatcher("/include2.html");
-		if ( rd2 != null )
-		{
+		if ( rd2 != null ) {
 			rd2.include(request,response);	
 		}
 
@@ -64,7 +58,5 @@ public class Include extends HttpServlet
 		
         out.println(" </body>");
         out.println("</html>");
-
 	}
-
 }
