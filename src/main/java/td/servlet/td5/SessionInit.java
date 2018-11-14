@@ -11,29 +11,31 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 /**
- * TD 5 - Creation et initialisation de la session
+ * TD SESSION - Creation et initialisation de la session
  *  
  * @author Laurent GUERIN 
  * 
  */
-public class SessionInit extends HttpServlet
-{
+public class SessionInit extends HttpServlet { 
+
 	private static final long serialVersionUID = 1L;
 
 	//--- Requete GET
-    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException
-    {
+	@Override
+    protected void doGet(HttpServletRequest request, HttpServletResponse response) 
+    		throws ServletException, IOException {
         process(request, response);
     }
 
     //--- Requete POST
-    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException
-    {
+	@Override
+    protected void doPost(HttpServletRequest request, HttpServletResponse response) 
+    		throws ServletException, IOException {
         process(request, response);
     }
 
-    private void process(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException
-    {
+    private void process(HttpServletRequest request, HttpServletResponse response) 
+    		throws ServletException, IOException {
         response.setContentType("text/html");
         PrintWriter out = response.getWriter();
         out.println("<html>");
@@ -44,14 +46,12 @@ public class SessionInit extends HttpServlet
 
         //--- Récupération de la session
         HttpSession session = request.getSession(); // Récupération de la session ou création si inexistante
-        if (session == null)
-        {
+        if (session == null) {
         	// Ne se produit jamais  
         	// Utile uniquement pour :  request.getSession(false);
             out.println("<h2>ERREUR : impossible d'obtenir une session ! </h2>");
         }
-        else
-        {
+        else {
             //--- Mise en session d'un entier
             Integer entier = new Integer(12);
             session.setAttribute("entier", entier); 
@@ -62,9 +62,8 @@ public class SessionInit extends HttpServlet
 
             out.println("<h2>Session initialisée </h2>");
         }
-
+        
         out.println(" </body>");
         out.println("</html>");
-        
     }
 }

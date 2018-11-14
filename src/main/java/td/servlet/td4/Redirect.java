@@ -8,7 +8,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 /**
- * TD 4
+ * TD REDIRECT
  *  
  * @author Laurent GUERIN 
  * 

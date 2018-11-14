@@ -10,33 +10,31 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 /**
- * TD 5 - Fin de la session 
+ * TD SESSION - Fin de la session 
  *  
  * @author Laurent GUERIN 
  * 
  */
+public class SessionStop extends HttpServlet {
 
-public class SessionStop extends HttpServlet
-{
-    /**
-	 * 
-	 */
 	private static final long serialVersionUID = 1L;
 
 	//--- Requete GET
-    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException
-    {
+	@Override
+    protected void doGet(HttpServletRequest request, HttpServletResponse response) 
+    		throws ServletException, IOException {
         process(request, response);
     }
 
     //--- Requete POST
-    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException
-    {
+	@Override
+    protected void doPost(HttpServletRequest request, HttpServletResponse response) 
+    		throws ServletException, IOException {
         process(request, response);
     }
 
-    private void process(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException
-    {
+    private void process(HttpServletRequest request, HttpServletResponse response) 
+    		throws ServletException, IOException {
         response.setContentType("text/html");
         PrintWriter out = response.getWriter();
         out.println("<html>");
@@ -47,18 +45,15 @@ public class SessionStop extends HttpServlet
 
         //--- Récupération de la session
         HttpSession session = request.getSession(false);
-        if (session == null)
-        {
+        if (session == null) {
             out.println("<h2>Aucune session active ! </h2>");
         }
-        else
-        {
+        else {
             session.invalidate();
             out.println("<h2>Session invalidée. </h2>");
         }
 
         out.println("</body>");
         out.println("</html>");
-        
     }
 }
