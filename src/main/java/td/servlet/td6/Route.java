@@ -87,7 +87,7 @@ public class Route extends HttpServlet {
         	Tooling.forward("/page2.html", request, response);
         }
         else {
-    		printMessage(response,"<h2>No page incorrect ! </h2>");
+    		printMessage(response,"<h2>Numero de page incorrect ! </h2>");
         }
     }
 
@@ -98,7 +98,7 @@ public class Route extends HttpServlet {
         	Tooling.forward("/Hello", request, response);
         }
         else {
-    		printMessage(response,"<h2>No page incorrect ! </h2>");
+    		printMessage(response,"<h2>Identifiant de servlet incorrect ! </h2>");
         }
     }
 

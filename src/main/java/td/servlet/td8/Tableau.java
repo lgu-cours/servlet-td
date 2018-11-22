@@ -16,21 +16,18 @@ public class Tableau extends HttpServlet
 
 	//--- Http GET method 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
-					throws ServletException, IOException
-	{
+			throws ServletException, IOException {
 		process(request, response);
 	}
 
 	//--- Http POST method 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
-					throws ServletException, IOException
-	{
+			throws ServletException, IOException {
 		process(request, response);
 	}
 	
 	private void process(HttpServletRequest request, HttpServletResponse response)
-			throws ServletException, IOException	
-	{
+			throws ServletException, IOException {
 		String paramType = request.getParameter("type");
 		if ( paramType == null ) {
 			paramType = "html" ;
@@ -58,8 +55,7 @@ public class Tableau extends HttpServlet
 	 * @throws IOException
 	 */
 	private void tableauHTML(HttpServletRequest request, HttpServletResponse response)
-					throws ServletException, IOException
-	{
+			throws ServletException, IOException {
 		// Type MIME pour un flux HTML 
 		response.setContentType("text/html");
 		
@@ -101,8 +97,8 @@ public class Tableau extends HttpServlet
 	 * @throws ServletException
 	 * @throws IOException
 	 */
-	private void tableauXML(HttpServletRequest request,
-			HttpServletResponse response) throws ServletException, IOException {
+	private void tableauXML(HttpServletRequest request,	HttpServletResponse response) 
+			throws ServletException, IOException {
 		
 		// Type MIME pour un flux HTML
 		response.setContentType("text/xml");
