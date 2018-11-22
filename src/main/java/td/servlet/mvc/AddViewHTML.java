@@ -1,18 +1,20 @@
 package td.servlet.mvc ;
 
-import java.io.*;
+import java.io.IOException;
+import java.io.PrintWriter;
 
-import javax.servlet.*;
+import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
-import javax.servlet.http.*;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 
 /**
- * TD 8 - Add with JSON result
+ * Add "VIEW" with HTML result
  *  
  * @author Laurent GUERIN 
  * 
  */
-//@WebServlet(name="add-view-html", urlPatterns="/add-view-html")
 @WebServlet(name="add-view-html", urlPatterns="/add-view-html") // URL is mandatory
 public class AddViewHTML extends HttpServlet {
 	private static final long serialVersionUID = 1L;
@@ -20,12 +22,14 @@ public class AddViewHTML extends HttpServlet {
 	private static final String HTML_CONTENT_TYPE = "text/html";
 
 	//--- Http GET method 
+	@Override
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 					throws ServletException, IOException {
 		process(request, response);
 	}
 
 	//--- Http POST method 
+	@Override
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 					throws ServletException, IOException {
 		process(request, response);
@@ -34,22 +38,20 @@ public class AddViewHTML extends HttpServlet {
 	private void process(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		
-		Double result = (Double) request.getAttribute(Const.RESULT);
+		// Try to get the "MODEL" 
+		AddModel model = Util.getModel(request, Const.RESULT);
 		
-		if ( result != null ) {
-			printView(response, result);
-		}
-		else {
-			throw new IllegalStateException("No result attribute");
-		}
+		// Print the "VIEW" using the "MODEL"
+		printView(response, model);
 	}
 	
-    private void printView(HttpServletResponse response, double result ) 
+    private void printView(HttpServletResponse response, AddModel model ) 
     		throws ServletException, IOException {
 	    PrintWriter out = response.getWriter();
 	    response.setContentType(HTML_CONTENT_TYPE);
     	out.println("<body>");
-	    out.println("<h2>result  : " + result + " </h2>");
+	    out.println("<h2>message  : " + model.getMessage() + " </h2>");
+	    out.println("<h2>result  : " + model.getResult() + " </h2>");
 	    out.println("</body>");    	    
     }
     

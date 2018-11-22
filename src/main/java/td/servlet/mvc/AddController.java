@@ -7,22 +7,25 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.*;
 
 /**
- * TD 8 - Add with forward to view
+ * Add "CONTROLLER" : compute then forward to view
  *  
  * @author Laurent GUERIN 
  * 
  */
 @WebServlet(urlPatterns="/add")
-public class Add extends HttpServlet {
+public class AddController extends HttpServlet {
+	
 	private static final long serialVersionUID = 1L;
 	
 	//--- Http GET method 
+	@Override
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 					throws ServletException, IOException {
 		process(request, response);
 	}
 
 	//--- Http POST method 
+	@Override
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 					throws ServletException, IOException {
 		process(request, response);
@@ -31,14 +34,21 @@ public class Add extends HttpServlet {
 	private void process(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		
-    	double d1 = paramValue(request, "p1" );
-    	double d2 = paramValue(request, "p2" );
-    	double result = d1 + d2 ;
-    	System.out.println( " result = " + result + " ( " + d1 + " + " + d2 + " ) ");
+		// Step 1 : Get input parameters
+    	double p1 = getParamValue(request, "p1" );
+    	double p2 = getParamValue(request, "p2" );
+    	System.out.println( " input parameters : " + p1 + " + " + p2 );
     	
-    	request.setAttribute(Const.RESULT, result);
+    	// Step 2 : Call the service 
+    	AddService service = new AddService();
+    	AddModel model = service.add(p1, p2);
+    	System.out.println( " result = " + model.getResult() );
+    	
+    	// Step 3 : Store the result "MODEL" in the REQUEST scope
+    	request.setAttribute(Const.RESULT, model);
     	System.out.println( " forward... " );
     	
+    	// Step 4 : Forward to the "VIEW"
     	String type = request.getParameter("type") ;
     	if ( type != null && "JSON".equalsIgnoreCase(type) ) {
     		Util.forwardByURI("/add-view-json", request, response);    		
@@ -50,7 +60,7 @@ public class Add extends HttpServlet {
     	}
 	}
 	
-    private double paramValue(HttpServletRequest request, String name ) {
+    private double getParamValue(HttpServletRequest request, String name ) {
     	String value = request.getParameter(name);
     	if ( value == null ) {
     		throw new IllegalArgumentException( "No parameter '" + name + "'" );

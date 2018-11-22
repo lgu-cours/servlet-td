@@ -9,21 +9,21 @@ import javax.servlet.http.*;
  * @author Laurent GUERIN 
  * 
  */
-public class Hello extends HttpServlet
-{
+public class Hello extends HttpServlet {
+	
 	private static final long serialVersionUID = 1L;
 
 	//--- Http GET method 
+	@Override
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
-					throws ServletException, IOException
-	{
+					throws ServletException, IOException {
 		process(request, response);
 	}
 
 	//--- Http POST method 
+	@Override
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
-					throws ServletException, IOException
-	{
+					throws ServletException, IOException {
 		process(request, response);
 	}
 	

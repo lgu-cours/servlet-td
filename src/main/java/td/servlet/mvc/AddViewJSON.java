@@ -7,7 +7,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.*;
 
 /**
- * TD 8 - Add with JSON result
+ * Add "VIEW" with JSON result
  *  
  * @author Laurent GUERIN 
  * 
@@ -22,12 +22,14 @@ public class AddViewJSON extends HttpServlet {
 	private static final String JSON_CONTENT_TYPE = "application/json";	 // Official : IETF RFC-4627  
 
 	//--- Http GET method 
+	@Override
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 					throws ServletException, IOException {
 		process(request, response);
 	}
 
 	//--- Http POST method 
+	@Override
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 					throws ServletException, IOException {
 		process(request, response);
@@ -36,22 +38,19 @@ public class AddViewJSON extends HttpServlet {
 	private void process(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		
-		Double result = (Double) request.getAttribute(Const.RESULT);
+		// Try to get the "MODEL" 
+		AddModel model = Util.getModel(request, Const.RESULT);
 		
-		if ( result != null ) {
-			printJSON(response, result);
-		}
-		else {
-			throw new IllegalStateException("No result attribute");
-		}
+		// Print the "VIEW" using the "MODEL"
+		printView(response, model);
 	}
 	
-    private void printJSON(HttpServletResponse response, double result ) 
+    private void printView(HttpServletResponse response, AddModel model ) 
     		throws ServletException, IOException {
 	    PrintWriter out = response.getWriter();
 	    response.setContentType(JSON_CONTENT_TYPE);
     	out.println("{");
-	    out.println("\"result\" : \"" + result + "\"  ");
+	    out.println("\"result\" : \"" + model.getResult() + "\"  ");
 	    out.println("}");    	    
     }
     
